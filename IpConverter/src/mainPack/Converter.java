@@ -1,6 +1,6 @@
 /*
- * @Autor Mateus R R Spadacio
- * @versão 1.0
+ * @Author Mateus R R Spadacio
+ * @version 1.0
  * 
  * */
 
