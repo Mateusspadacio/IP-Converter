@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 
 public class Converter {
-
+	
+	/* Variables and Objects */
 	Scanner in = new Scanner(System.in);
 	public int ipv4[] = new int[4];
 	public int getOctet[] = new int[32];
@@ -18,7 +19,6 @@ public class Converter {
 	int aux, sum, cont = 0, auxSum = 8, j = 0;
 	
 	StringBuilder ipv6 = new StringBuilder();
-	
 	
 	
 	public void receiveIp(){
@@ -32,6 +32,7 @@ public class Converter {
 		System.out.println("Write the fourth octet in decimal");
 		ipv4[3] = in.nextInt();
 	
+		//Verify ip address
 		for(int i = 0; i < 4; i++){
 			if(ipv4[i] > 255){
 				System.out.println("*** The ip address is incorrect !!!");
@@ -41,7 +42,7 @@ public class Converter {
 		
 	}
 	
-	
+	//Print the generated binaries
 	public void print(){
 		for(int i = 0; i <= 31; i++){
 			System.out.print(getOctet[i]);
@@ -49,10 +50,10 @@ public class Converter {
 		System.out.println("\n");
 	}
 	
-	
+	/*
+	*It uses BCD 8421 to convert ip address
+	*/
 	public void converting(){
-		
-		
 		
 		for(int i = 0; i < 4; i++){
 			
@@ -121,13 +122,7 @@ public class Converter {
 			}else{
 				cont++;
 			}
-			
-			
-			
-			
 		}
-		
-		
 	}
 	
 	
@@ -136,13 +131,13 @@ public class Converter {
 		
 			int i = 0;
 			while(true){
-			
-				if(getOctet[i] == 1){
-					sum = sum + auxSum;
+				//Checks whether the bit is on or off
+				if(getOctet[i] == 1){	
+					sum = sum + auxSum; //add 8 or 4 or 2 or 1
 				}else{
 					sum = sum + 0;
 				}
-				
+				//Reset variables and go to the next octet
 				if(auxSum == 1){
 					saveSum[j] = sum;
 					auxSum = 8;
@@ -150,12 +145,18 @@ public class Converter {
 					System.out.println(saveSum[j]);
 					j++;		
 				}else{
-					auxSum = auxSum / 2;
+					//If it didn't finish
+					auxSum = auxSum / 2; 
+					/* 8/2 = 4 next
+					*  4/2 = 2 next
+					*  2/2 = 1 end
+					*/
 				}
 				
 				
 				i++;
 				
+				//After checking each bit, it stops
 				if(i == 32){
 					break;
 				}
@@ -170,9 +171,9 @@ public class Converter {
 		
 		for(int i = 0; i < 8; i++){
 			if(i == 4){
-				ipv6.append(":"+Integer.toString(saveSum[i], 16).toUpperCase());
+				ipv6.append(":"+Integer.toString(saveSum[i], 16).toUpperCase()); //Hexadecimal conversion
 			}else{
-				ipv6.append(Integer.toString(saveSum[i], 16).toUpperCase());
+				ipv6.append(Integer.toString(saveSum[i], 16).toUpperCase()); //Hexadecimal conversion
 			}
 		}
 		
