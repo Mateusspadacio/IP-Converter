@@ -54,75 +54,26 @@ public class Converter {
 	*It uses BCD 8421 to convert ip address
 	*/
 	public void converting(){
-		
 		for(int i = 0; i < 4; i++){
-			
+			bits = 128;
 			aux = ipv4[i];
-			
-			if(aux >= 128){
-				aux = aux - 128;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
+			while(true){
+				if(aux >= bits){
+					aux -= bits;
+					getOctet[cont] = 1;
+					cont++;
+				}else{
+					cont++;
+				}
+				
+				if(bits == 1){
+					break;
+				}
+				bits /= 2;
 			}
 			
-			if(aux >= 64){
-				aux = aux - 64;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-			
-			if(aux >= 32){
-				aux = aux - 32;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-			
-			if(aux >= 16){
-				aux = aux - 16;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-			
-			if(aux >= 8){
-				aux = aux - 8;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-			
-			if(aux >= 4){
-				aux = aux - 4;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-			
-			if(aux >= 2){
-				aux = aux - 2;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-			
-			if(aux >= 1){
-				aux = aux - 1;
-				getOctet[cont] = 1;
-				cont++;
-			}else{
-				cont++;
-			}
-		}
+		}	
+		
 	}
 	
 	
